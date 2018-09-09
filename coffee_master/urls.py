@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+from food import views as food_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^order/$', views.order),
-    url(r'^about/$', views.about),
-    url(r'^$', views.homepage),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^food/', include('food.urls')),
+    url(r'^about/$', views.about),
+    url(r'^$', food_view.homepage),
 ]
