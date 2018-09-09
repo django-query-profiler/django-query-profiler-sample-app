@@ -8,3 +8,6 @@ def order(request):
 @login_required(login_url="accounts:login")
 def homepage(request):
     return render(request, "food/homepage.html")
+
+def prepare(request):
+    return render(request, "food/prepare.html")
