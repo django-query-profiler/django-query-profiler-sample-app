@@ -10,7 +10,6 @@ def homepage(request):
     return render(request, "food/homepage.html")
 
 @login_required
-@permission_required('food.can_order', raise_exception=True)
+@permission_required('food.can_prepare', raise_exception=True)
 def prepare(request):
     return render(request, "food/prepare.html")
-    
