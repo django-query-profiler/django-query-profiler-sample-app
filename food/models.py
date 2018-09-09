@@ -7,3 +7,4 @@ class FoodInstance(models.Model):
             ("can_order", "Can order the drinks"),
             ("can_serve", "Can prepare and serve the drinks"),
         )
+        

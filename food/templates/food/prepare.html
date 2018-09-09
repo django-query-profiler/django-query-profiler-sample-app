@@ -2,6 +2,12 @@
 
 {% block content %}
 
+{% if perms.food.can_serve %}
 <h1>prepare the drink</h1>
+
+{% else %}
+<h2>Sorry, you don't have permission to access this page</h2>
+
+{% endif %}
 
 {% endblock %}
