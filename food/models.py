@@ -4,6 +4,6 @@ from django.db import models
 class FoodInstance(models.Model):
     class Meta:
         permissions = (
-            ("can_order", "Can order the drink"),
-            ("can_server", "Can prepare and serve the drink"),
+            ("can_order", "Can order the drinks"),
+            ("can_serve", "Can prepare and serve the drinks"),
         )
