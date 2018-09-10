@@ -25,3 +25,6 @@ urlpatterns = [
     url(r'^about/$', views.about),
     url(r'^$', food_view.homepage),
 ]
+
+# override 403 error view
+handler403 = 'coffee_master.views.my_custom_permission_denied_view'
