@@ -3,10 +3,13 @@
 {% block content %}
 
 {% if perms.food.can_serve %}
-<h1>prepare the drink</h1>
+    <h1>prepare the drink</h1>
+    {% for order in orders %}
+        <p>{{ order.name }} orders {{ order.coffee_order }}</p>
+    {% endfor %}
 
 {% else %}
-<h2>Sorry, you don't have permission to access this page</h2>
+    <h2>Sorry, you don't have permission to access this page</h2>
 
 {% endif %}
 
