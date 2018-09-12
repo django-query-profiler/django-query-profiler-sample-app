@@ -5,7 +5,7 @@
 {% if perms.food.can_serve %}
     <h1>prepare the drink</h1>
     {% for order in orders %}
-        <p>{{ order.name }} orders {{ order.coffee_order }}</p>
+        <p>{{ order.name }} orders {{ order.coffee_order }} with id: {{ order.id }}</p>
     {% endfor %}
 
 {% else %}
