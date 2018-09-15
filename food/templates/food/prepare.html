@@ -2,15 +2,16 @@
 
 {% block content %}
 
-{% if perms.food.can_serve %}
-    <h1>prepare the drink</h1>
-    {% for order in orders %}
-        <p>{{ order.name }} orders {{ order.coffee_order }} with id: {{ order.id }}</p>
-    {% endfor %}
+<h1>prepare the drink</h1>
+{% for order in orders %}
+    <p>{{ order.name }} orders {{ order.coffee_order }} with id: {{ order.id }}</p>
+{% endfor %}
 
-{% else %}
-    <h2>Sorry, you don't have permission to access this page</h2>
+<div id="vue-app">
+    <button type="button" v-on:click="changeButton" class=btn>${buttonMsg}</button>
+</div>
 
-{% endif %}
+{% load static from staticfiles %}
+<script src="{% static 'app.js' %}"></script>
 
 {% endblock %}
