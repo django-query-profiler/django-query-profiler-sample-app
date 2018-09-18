@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from .forms import OrderForm
 from .models import OrderInstance
 from django.http import HttpResponseBadRequest
+from .serializers import OrderSerializer
+from rest_framework import generics
 
 @login_required
 @permission_required('food.can_order', raise_exception=True)
@@ -39,3 +41,26 @@ def success(request):
         return render(request, "food/orderSuccess.html")
     else:
         return HttpResponseBadRequest('<h1>HTTP Error 400: You need to place an order!</h1>')
+
+class OrderList(generics.ListCreateAPIView):
+    queryset = OrderInstance.objects.all()
+    serializer_class = OrderSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderInstance.objects.all()
+    serializer_class = OrderSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
