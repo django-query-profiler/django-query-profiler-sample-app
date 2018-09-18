@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
 from food import views as food_view
+from .routers import router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^food/', include('food.urls')),
     url(r'^about/$', views.about),
     url(r'^$', food_view.homepage),
+    url(r'api/', include(router.urls))
 ]
 
 # override 403 error view
