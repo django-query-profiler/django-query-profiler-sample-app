@@ -4,7 +4,7 @@ from .forms import OrderForm
 from .models import OrderInstance
 from django.http import HttpResponseBadRequest
 from .serializers import OrderSerializer
-from rest_framework import generics
+from rest_framework import generics, permissions
 
 @login_required
 @permission_required('food.can_order', raise_exception=True)
@@ -45,6 +45,7 @@ def success(request):
 class OrderList(generics.ListCreateAPIView):
     queryset = OrderInstance.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -55,6 +56,7 @@ class OrderList(generics.ListCreateAPIView):
 class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderInstance.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
