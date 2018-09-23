@@ -19,6 +19,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Customer Name</th>
                         <th scope="col">Order</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,9 @@
                         <th scope="row">${order.id}</th>
                         <td>${order.name}</td>
                         <td>${order.coffee_order}</td>
+                        <td>
+                            <button class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -36,6 +36,18 @@ var app2 = new Vue({
                     this.loading = false;
                     console.log(err);
                 })
+          },
+          deleteOrder: function(id) {
+            this.loading = true;
+            this.$http.delete(`/food/orderdetail/${id}/`)
+                .then((response) => {
+                    this.loading = false;
+                    this.getOrders();
+                })
+                .catch((err) => {
+                    this.loading = false;
+                    console.log(err);
+                })
           }
       }
 })
