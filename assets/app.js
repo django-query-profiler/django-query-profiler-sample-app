@@ -13,6 +13,11 @@ var app2 = new Vue({
         this.getOrders();
     },
     methods: {
+        getCookie: function(name) {
+            var value = '; ' + document.cookie
+            var parts = value.split('; ' + name + '=')
+            if (parts.length === 2) return parts.pop().split(';').shift()
+        },
         getOrders: function() {
             this.loading = true;
             this.$http.get('/food/orderlist/')
@@ -39,7 +44,7 @@ var app2 = new Vue({
           },
           deleteOrder: function(id) {
             this.loading = true;
-            this.$http.delete(`/food/orderdetail/${id}/`)
+            this.$http.delete(`/food/orderdetail/${id}/`, {headers: {'X-CSRFToken': this.getCookie('csrftoken')}} )
                 .then((response) => {
                     this.loading = false;
                     this.getOrders();
