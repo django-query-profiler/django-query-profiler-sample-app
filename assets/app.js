@@ -56,7 +56,7 @@ var app2 = new Vue({
           },
           updateOrder: function() {
               this.loading = true;
-              this.$http.put(`food/orderdetail/${this.currentOrder.id}/`, this.currentOrder)
+              this.$http.put(`/food/orderdetail/${this.currentOrder.id}/`, this.currentOrder, {headers: {'X-CSRFToken': this.getCookie('csrftoken')}} )
                 .then((response) => {
                     this.loading = false;
                     this.currentOrder = response.data;
