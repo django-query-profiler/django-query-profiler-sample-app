@@ -28,11 +28,58 @@
                         <td>${order.name}</td>
                         <td>${order.coffee_order}</td>
                         <td>
+                            <button class="btn btn-info" v-on:click="getOrder(order.id)">Edit</button>
                             <button class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+
+            <!-- Edit order Modal -->
+            <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">EDIT ORDER</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form v-on:submit.prevent="updateOrder()">
+                    <div class="modal-body">
+                        <div class="form-group">
+                          <label for="name">Customer Name</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            placeholder="Enter Your Name"
+                            v-model="currentOrder.name"
+                            required="required" >
+                        </div>
+                        <div class="form-group">
+                          <label for="coffee_order">Coffee Order</label>
+                          <textarea
+                            class="form-control"
+                            id="coffee_order"
+                            placeholder="Place Your Order"
+                            v-model="currentOrder.coffee_order"
+                            required="required"
+                            rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary m-progress" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="loading" v-if="loading===true">Loading&#8230;</div>
+            </div>
+              <!-- End of edit order modal -->
+
         </div>
     </div>
     <div class="loading" v-if="loading===true">Loading&#8230;</div>
