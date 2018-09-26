@@ -69,3 +69,11 @@ var app2 = new Vue({
           }
       }
 })
+
+setInterval(async function() {
+    let response = await fetch('/food/orderlist/');
+    let data = await response.json();
+    app2.loading = true;
+    app2.orders = data;
+    app2.loading = false;
+}, 7000)
