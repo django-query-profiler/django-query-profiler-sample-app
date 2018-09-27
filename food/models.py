@@ -12,3 +12,6 @@ class OrderInstance(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     coffee_order = models.CharField(max_length=100)
+
+class BusinessObject(models.Model):
+    business_status = models.CharField(max_length=10)

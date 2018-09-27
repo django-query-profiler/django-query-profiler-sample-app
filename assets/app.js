@@ -3,6 +3,7 @@ var app2 = new Vue({
     delimiters: ['${', '}'],
     data: {
         orders: [],
+        business_open: open,
         loading: false,
         currentOrder: {},
         message: null,
@@ -76,4 +77,17 @@ setInterval(async function() {
     app2.loading = true;
     app2.orders = data;
     app2.loading = false;
+
+    $.ajax({
+        type: "GET",
+        url: "/food/prepare/"
+    })
+    .done(function(response) {
+        if ($(response).find('#status').text() == 'open') {
+            app2.business_open = true
+        } else {
+            app2.business_open = false
+        }
+    })
+
 }, 7000)

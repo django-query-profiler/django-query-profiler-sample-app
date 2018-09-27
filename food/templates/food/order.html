@@ -5,11 +5,17 @@
 <h1>order menu</h1>
 <div id="vue-prepare">
     <div class="order">
-        <form class="site-form" action="{% url 'food:order' %}" method="post" enctype="multipart/form-data">
+        
+        <form v-if="business_open" class="site-form" action="{% url 'food:order' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Order">
         </form>
+
+        <div v-else>
+            business close now
+        </div>
+
     </div>
 </div>
 

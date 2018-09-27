@@ -3,7 +3,7 @@ from django.http import HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework import generics, permissions
 from .forms import OrderForm
-from .models import OrderInstance
+from .models import OrderInstance, BusinessObject
 from .serializers import OrderSerializer
 from .permissions import IsBaristaOnly
 
@@ -32,8 +32,15 @@ def homepage(request):
 @login_required
 @permission_required('food.can_serve', raise_exception=True)
 def prepare(request):
+    if request.method == 'POST':
+        obj = BusinessObject.objects.first()
+        obj.business_status = request.POST['business_status']
+        obj.save()
+        business_status = obj.business_status
+    else:
+        business_status = BusinessObject.objects.first().business_status
     orders = OrderInstance.objects.all()
-    return render(request, "food/prepare.html", { 'orders':orders })
+    return render(request, "food/prepare.html", { 'orders':orders, 'business_status':business_status })
 
 @login_required
 def success(request):

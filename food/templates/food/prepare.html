@@ -2,7 +2,16 @@
 
 {% block content %}
 
-<h1>prepare the drink</h1>
+<h2>Business status: <div id="status">{{ business_status }}</div></h2>
+<div>
+    <form action="{% url 'food:prepare' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" value="open" name="business_status">Open</button>
+        <button type="submit" value="close" name="business_status">Close</button>
+    </form>
+</div>
+
+<h3>prepare the drink</h3>
 {% for order in orders %}
     <p>{{ order.name }} orders {{ order.coffee_order }} with id: {{ order.id }}</p>
 {% endfor %}
