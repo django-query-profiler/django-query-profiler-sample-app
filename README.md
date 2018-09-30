@@ -9,6 +9,13 @@ Django 2.0 or above (preferred 2.1.1)
 Django REST framework 3.8.2
 ```
 
+## Getting Started
+Execute the below commands in the project rootdir and then open browser to browse to localhost:8000/
+```
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
 ## Features
 * **authentication**: user login and registration system<
 * **user groups**: two groups of users with different permissions: customer and barista 
