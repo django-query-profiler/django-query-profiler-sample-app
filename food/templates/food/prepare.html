@@ -10,15 +10,10 @@
         <button type="submit" value="close" name="business_status">Close</button>
     </form>
 </div>
+<br/>
+<br/>
 
 <h3>prepare the drink</h3>
-{% for order in orders %}
-    <p>{{ order.name }} orders {{ order.coffee_order }} with id: {{ order.id }}</p>
-{% endfor %}
-
-
-<hr>
-<h4>Below is the vue example</h4>
 <div id="vue-prepare">
     <div class="container">
         <div class="row">

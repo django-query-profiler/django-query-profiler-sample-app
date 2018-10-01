@@ -50,6 +50,10 @@ def success(request):
     else:
         return HttpResponseBadRequest('<h1>HTTP Error 400: You need to place an order!</h1>')
 
+def business(request):
+    business_status = BusinessObject.objects.first().business_status
+    return render(request, 'food/business.html', { 'business_status':business_status })
+
 class OrderList(generics.ListCreateAPIView):
     queryset = OrderInstance.objects.all()
     serializer_class = OrderSerializer

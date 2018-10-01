@@ -3,7 +3,7 @@ var app2 = new Vue({
     delimiters: ['${', '}'],
     data: {
         orders: [],
-        business_open: open,
+        business_open: '',
         loading: false,
         currentOrder: {},
         message: null,
@@ -11,6 +11,7 @@ var app2 = new Vue({
       },
     mounted: function() {
         this.getOrders();
+        this.getBusinessStatus();
     },
     methods: {
         getCookie: function(name) {
@@ -67,6 +68,15 @@ var app2 = new Vue({
                     this.loading = false;
                     console.log(err);
                 })
+          },
+          getBusinessStatus: function() {
+              this.$http.get('/food/business')
+                .then((response) => {
+                    this.business_open = ($(response.data).find('#business_status').text() == 'open');
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
           }
       }
 })
@@ -78,16 +88,5 @@ setInterval(async function() {
     app2.orders = data;
     app2.loading = false;
 
-    $.ajax({
-        type: "GET",
-        url: "/food/prepare/"
-    })
-    .done(function(response) {
-        if ($(response).find('#status').text() == 'open') {
-            app2.business_open = true
-        } else {
-            app2.business_open = false
-        }
-    })
-
+    app2.getBusinessStatus();
 }, 7000)
