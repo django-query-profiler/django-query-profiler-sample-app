@@ -1,14 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.models import Permission
 
 # Create your views here.
 def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            #add the customer permission to newly registered user
+            customer_perm = Permission.objects.get(codename='can_order')
+            user.user_permissions.add(customer_perm)
+
             # log the user in
+            login(request, user)
             return redirect('food:order')
     else:
         form = UserCreationForm()
