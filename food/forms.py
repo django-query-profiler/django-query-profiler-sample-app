@@ -1,9 +1,15 @@
 from django import forms
 
 COFFEE_CHOICES = [
+    ('americano', 'Americano'),
     ('cappuccino', 'Cappuccino'),
-    ('latte', 'Latte'),
+    ('glace', 'Glace'),
     ('mocha', 'Mocha'),
+    ('hot_chocolate', 'Hot Chocolate'),
+    ('irish', 'Irish'),
+    ('latte', 'Latte'),
+    ('espresso', 'Espresso'),
+    ('macchiato', 'Macchiato'),
 ]
 
 class OrderForm(forms.Form):

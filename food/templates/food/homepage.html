@@ -1,5 +1,10 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<h1>coffee master home</h1>
+<h1>coffee master menu</h1>
+<div>
+    {% load static from staticfiles %}
+    <img src="{% static 'coffee_menu.jpg' %}" alt="#" />
+</div>
+
 {% endblock %}
