@@ -47,7 +47,15 @@
                             <button type="submit">Logout</button>
                         </form>
                     </li>
-                    <li><a href="{% url 'food:order' %}" class="highlight">go order the drink now</a></li>
+
+                    {% if perms.food.can_order %}
+                    <li><a href="{% url 'food:order' %}" class="highlight">Order Drinks</a></li>
+                    {% endif %}
+
+                    {% if perms.food.can_serve %}
+                    <li><a href="{% url 'food:prepare' %}" class="highlight">Manage Orders</a></li>
+                    {% endif %}
+
                     {% else %}
                     <li><a href="{% url 'accounts:login' %}">Login</a></li>
                     <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
