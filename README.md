@@ -42,3 +42,12 @@ python3 manage.py test
 ## Demo
 ### Home Page
 ![Alt text](/img/homepage.png?raw=true "Homepage")
+
+### Signup Page
+![Alt text](/img/signup.png?raw=true "Signup")
+
+### Order Page
+![Alt text](/img/order.png?raw=true "Order")
+
+### Manage Page
+![Alt text](/img/manage.png?raw=true "Manage")
