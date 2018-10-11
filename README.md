@@ -17,10 +17,22 @@ python3 manage.py runserver
 ```
 
 ## Features
-* **authentication**: user login and registration system<
+* **authentication**: user login and registration system
 * **user groups**: two groups of users with different permissions: customer and barista 
 * **restricted urls**: Certian urls require users to login and some would require a particular permission 
 * **rest api**: use django rest framework to power the api endpoints 
 * **auto data loading**: pages are updated without the need to manually refresh the browser 
 * **automation test**: automate some tests to ensure that the essential functionalities consistent 
 * **clean UI**: super user friendly and easy to use 
+
+## Built with
+* **Django** - Backend
+* **Vuejs** - Frontend
+
+## APIs
+* /food/orderlist/ - GET and POST endpoints to retrieve the order lists and make order
+* /food/orderdetail/<order_id> - CRUD endpoints for particular order detail, only admin and baristas users have access
+
+
+
+

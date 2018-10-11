@@ -23,7 +23,7 @@ class UrlTests(TestCase):
 
 class ApiTest(TestCase):
     """
-    Ensure that for common users, the orderdetail is not accessible
+    Ensure that for users other than admin and baristas, the orderdetail is not accessible
     """
     def test_authentication(self):
         url = reverse('food:list')
