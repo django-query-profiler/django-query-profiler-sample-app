@@ -33,6 +33,12 @@ python3 manage.py runserver
 * /food/orderlist/ - GET and POST endpoints to retrieve the order lists and make order
 * /food/orderdetail/<order_id> - CRUD endpoints for particular order detail, only admin and baristas users have access
 
+## Test
+Execute the below command in the project rootdir to run the test automation
+```
+python3 manage.py test
+```
 
-
-
+## Demo
+### Home Page
+![Alt text](/img/homepage.png?raw=true "Homepage")
