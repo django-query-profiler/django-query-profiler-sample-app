@@ -3,9 +3,9 @@
 {% block content %}
 
 <h1>order form</h1>
-<div id="vue-prepare">
+<div id="vue-app">
     <div class="order">
-        <template v-if="business_open">
+        <template v-if="businessOpen">
             <form class="site-form" action="{% url 'food:order' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form }}
@@ -13,13 +13,12 @@
             </form>
         </template>
         
-        <template v-else-if="business_open===false">
+        <template v-else-if="businessOpen===false">
             business close now
         </template>
 
     </div>
 </div>
-
 
 {% load static from staticfiles %}
 <script src="{% static 'js/app.js' %}"></script>

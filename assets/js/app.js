@@ -1,13 +1,14 @@
 var app2 = new Vue({
-    el: "#vue-prepare",
+    el: "#vue-app",
     delimiters: ['${', '}'],
     data: {
         orders: [],
-        business_open: '',
+        businessOpen: '',
         loading: false,
         currentOrder: {},
         message: null,
         newOrder: { 'name': null, 'coffee_order': null },
+        orderTime: new Date().toLocaleString().slice(11, ),
       },
     mounted: function() {
         this.getOrders();
@@ -72,7 +73,7 @@ var app2 = new Vue({
           getBusinessStatus: function() {
               this.$http.get('/food/business')
                 .then((response) => {
-                    this.business_open = ($(response.data).find('#business_status').text() == 'open');
+                    this.businessOpen = ($(response.data).find('#business_status').text() == 'open');
                 })
                 .catch((err) => {
                     console.log(err);

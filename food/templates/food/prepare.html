@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div id="vue-prepare">
-    <template v-if="business_open===''">
+<div id="vue-app">
+    <template v-if="businessOpen===''">
             Loading&#8230;
     </template>
     
     <template v-else>
-        <div v-bind:class="{business_open: business_open}">
+        <div v-bind:class="{businessOpen: businessOpen}">
             <div id="business_status">
                 <h2>Business status: {{ business_status }}</h2>
             </div>

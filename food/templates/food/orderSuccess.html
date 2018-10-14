@@ -1,16 +1,24 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    <h4>Order summary:</h4>
-    <ul>
-        <li>Order ID: {{ order_data.id }}</li>
-        <li>Name: {{ order_data.name }}</li>
-        <li>Order: {{ order_data.coffee_order }}</li>
-    </ul>
-    
-    <br/>
-    <br/>
-    <p>Please don't refresh the page</p>
-    
+
+<div id="vue-app">
+    <div class="order-success">
+        <h4>Order summary:</h4>
+        <ul>
+            <li>Order ID: {{ order_data.id }}</li>
+            <li>Name: {{ order_data.name }}</li>
+            <li>Order: {{ order_data.coffee_order }}</li>
+            <li>Your order placed at: ${orderTime}</li> 
+        </ul>
+        
+        <br/>
+        <br/>
+        <p>Please don't refresh the page</p>
+    </div>
+</div>
+
+{% load static from staticfiles %}
+<script src="{% static 'js/app.js' %}"></script>
     
 {% endblock %}
