@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest
+from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework import generics, permissions
 from .forms import OrderForm
@@ -19,8 +20,13 @@ def order(request):
             # save OrderInstance to db
             customer_order = OrderInstance(name=name, email=email, coffee_order=coffee_order)
             customer_order.save()
+            
             # set the pp_order (previous page order) key so user can view success page
             request.session['pp_order'] = True
+
+            # covert model instance to dict format so it's serializable and can be used in session
+            dict_order = model_to_dict(customer_order)
+            request.session['order_data'] = dict_order
             return redirect('food:success')
     else:
         form = OrderForm()
@@ -46,7 +52,7 @@ def prepare(request):
 def success(request):
     if 'pp_order' in request.session:
         del request.session['pp_order'] # delete the key so users won't be able to enter success page twice
-        return render(request, "food/orderSuccess.html")
+        return render(request, "food/orderSuccess.html", { 'order_data': request.session['order_data'] })
     else:
         return HttpResponseBadRequest('<h1>HTTP Error 400: You need to place an order!</h1>')
 
