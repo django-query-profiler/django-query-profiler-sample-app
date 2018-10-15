@@ -87,6 +87,19 @@ var app2 = new Vue({
               if ($('.order-success > ul > li:first-child').length != 0) {
                 this.orderID = $('.order-success > ul > li:first-child').text().slice(10, );
               }
+          },
+          doneOrder: async function(id) {
+              this.loading = true;
+              let response = await this.$http.get(`/food/orderdetail/${id}/`);
+              this.currentOrder = response.data;
+
+              if (this.currentOrder.coffee_order.includes('done') == false) {
+                  this.currentOrder.coffee_order += " (done)";
+              }
+              response = await this.$http.put(`/food/orderdetail/${this.currentOrder.id}/`, this.currentOrder, {headers: {'X-CSRFToken': this.getCookie('csrftoken')}} );
+              this.loading = false;
+              this.currentOrder = response.data;
+              this.getOrders();
           }
       }
 })
