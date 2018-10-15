@@ -4,6 +4,11 @@
 
 <div id="vue-app">
     <div class="order-success">
+        <template v-if="orderReady">
+            <div class="alert alert-success" role="alert">
+                Your drink is ready to pick up!
+            </div>
+        </template>
         <h4>Order summary:</h4>
         <ul>
             <li>Order ID: {{ order_data.id }}</li>

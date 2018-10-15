@@ -9,10 +9,13 @@ var app2 = new Vue({
         message: null,
         newOrder: { 'name': null, 'coffee_order': null },
         orderTime: new Date().toLocaleString().slice(11, ),
+        orderID: '',
+        orderReady: '',
       },
     mounted: function() {
         this.getOrders();
         this.getBusinessStatus();
+        this.getOrderId();
     },
     methods: {
         getCookie: function(name) {
@@ -78,16 +81,33 @@ var app2 = new Vue({
                 .catch((err) => {
                     console.log(err);
                 })
+          },
+          getOrderId: function() {
+              // this function used in orderSuccess page
+              if ($('.order-success > ul > li:first-child').length != 0) {
+                this.orderID = $('.order-success > ul > li:first-child').text().slice(10, );
+              }
           }
       }
 })
 
 setInterval(async function() {
+
+    // update the orders data without reloading the page
     let response = await fetch('/food/orderlist/');
     let data = await response.json();
     app2.loading = true;
     app2.orders = data;
     app2.loading = false;
 
+    // update the order status (used in orderSuccess page)
+    let orderStatus = app2.orders.filter(order => order['id'] == app2.orderID)[0];
+    if (orderStatus != null) {
+        if (orderStatus.coffee_order.includes('done')) {
+            app2.orderReady = true;
+        }
+    }
+    
+    // update business status
     app2.getBusinessStatus();
 }, 7000)
