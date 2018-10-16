@@ -39,14 +39,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="order in orders">
-                        <th scope="row">${order.id}</th>
-                        <td>${order.name}</td>
-                        <td>${order.coffee_order}</td>
+                    <tr v-for="order in orders" v-bind:class="{ 'order-done':order.done }">
+                        <th scope="row" id="order-detail">${order.id}</th>
+                        <td id="order-detail">${order.name}</td>
+                        <td id="order-detail">${order.coffee_order}</td>
                         <td>
                             <button class="btn btn-info" v-on:click="getOrder(order.id)">Edit</button>
                             <button class="btn btn-danger" v-on:click="deleteOrder(order.id)">Delete</button>
-                            <button class="btn btn-success" v-on:click="doneOrder(order.id)">Done</button>
+                            <button class="btn btn-success" v-on:click="doneOrder(order.id)" :disabled="order.done">Done</button>
                         </td>
                     </tr>
                 </tbody>

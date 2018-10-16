@@ -93,9 +93,7 @@ var app2 = new Vue({
               let response = await this.$http.get(`/food/orderdetail/${id}/`);
               this.currentOrder = response.data;
 
-              if (this.currentOrder.coffee_order.includes('done') == false) {
-                  this.currentOrder.coffee_order += " (done)";
-              }
+              this.currentOrder.done = true
               response = await this.$http.put(`/food/orderdetail/${this.currentOrder.id}/`, this.currentOrder, {headers: {'X-CSRFToken': this.getCookie('csrftoken')}} );
               this.loading = false;
               this.currentOrder = response.data;
@@ -116,9 +114,7 @@ setInterval(async function() {
     // update the order status (used in orderSuccess page)
     let orderStatus = app2.orders.filter(order => order['id'] == app2.orderID)[0];
     if (orderStatus != null) {
-        if (orderStatus.coffee_order.includes('done')) {
-            app2.orderReady = true;
-        }
+        app2.orderReady = orderStatus.done;
     }
     
     // update business status
