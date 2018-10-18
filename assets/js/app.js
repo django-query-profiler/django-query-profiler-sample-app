@@ -6,17 +6,17 @@ var app2 = new Vue({
     businessOpen: '',
     loading: false,
     currentOrder: {},
-    message: null,
     orderTime: new Date().toLocaleString().slice(11),
     orderID: '',
     orderReady: '',
     queue: 'loading...',
     notDoneOrders: []
   },
-  created: function () {
-    this.getOrders()
+  created: async function () {
+    await this.getOrders()
     this.getBusinessStatus()
     this.getOrderId()
+    this.getQueue()
   },
   methods: {
     getCookie: function (name) {
