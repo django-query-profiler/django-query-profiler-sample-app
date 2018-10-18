@@ -7,19 +7,16 @@ var app2 = new Vue({
     loading: false,
     currentOrder: {},
     message: null,
-    newOrder: { 'name': null, 'coffee_order': null },
     orderTime: new Date().toLocaleString().slice(11),
     orderID: '',
     orderReady: '',
-    queue: 'loading...'
+    queue: 'loading...',
+    notDoneOrders: []
   },
   created: function () {
     this.getOrders()
     this.getBusinessStatus()
     this.getOrderId()
-  },
-  mounted: function () {
-    this.getQueue()
   },
   methods: {
     getCookie: function (name) {
@@ -27,17 +24,12 @@ var app2 = new Vue({
       var parts = value.split('; ' + name + '=')
       if (parts.length === 2) return parts.pop().split(';').shift()
     },
-    getOrders: function () {
+    getOrders: async function () {
       this.loading = true
-      this.$http.get('/food/orderlist/')
-        .then((response) => {
-          this.orders = response.data
-          this.loading = false
-        })
-        .catch((err) => {
-          this.loading = false
-          console.log(err)
-        })
+      let response = await fetch('/food/orderlist/')
+      let data = await response.json()
+      this.orders = data
+      this.loading = false
     },
     getOrder: function (id) {
       this.loading = true
@@ -104,23 +96,16 @@ var app2 = new Vue({
       this.getOrders()
     },
     getQueue: function () {
-      let notDoneOrders = this.orders.filter(order => order.done === false)
-      if (this.orderID === '') {
-        this.queue = notDoneOrders.length
-      } else {
-        this.queue = notDoneOrders.filter(order => order.id < this.orderID).length
-      }
+      this.notDoneOrders = this.orders.filter(order => order.done === false)
+      if (this.orderID === '') this.queue = this.notDoneOrders.length
+      else this.queue = this.notDoneOrders.filter(order => order.id <= this.orderID).length
     }
   }
 })
 
 setInterval(async function () {
   // update the orders data without reloading the page
-  let response = await fetch('/food/orderlist/')
-  let data = await response.json()
-  app2.loading = true
-  app2.orders = data
-  app2.loading = false
+  app2.getOrders()
 
   // update the order status (used in orderSuccess page)
   let orderStatus = app2.orders.filter(order => order['id'] === app2.orderID)[0]

@@ -9,6 +9,11 @@
                 Your drink is ready to pick up!
             </div>
         </template>
+        <template v-else>
+            <div class="alert alert-secondary" role="alert">
+                Order is in process. You are in queue: ${queue}
+            </div>
+        </template>
         <h4>Order summary:</h4>
         <ul>
             <li>Order ID: {{ order_data.id }}</li>
