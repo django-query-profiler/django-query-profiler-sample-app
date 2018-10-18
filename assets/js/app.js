@@ -9,7 +9,7 @@ var app2 = new Vue({
     orderTime: new Date().toLocaleString().slice(11),
     orderID: '',
     orderReady: '',
-    queue: 'loading...',
+    queue: '',
     notDoneOrders: []
   },
   created: async function () {
@@ -103,7 +103,7 @@ var app2 = new Vue({
   }
 })
 
-setInterval(async function () {
+setInterval(function () {
   // update the orders data without reloading the page
   app2.getOrders()
 
