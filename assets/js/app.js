@@ -70,7 +70,7 @@ var app2 = new Vue({
         })
     },
     getBusinessStatus: function () {
-      this.$http.get('/food/business')
+      this.$http.get('/food/business/')
         .then((response) => {
           this.businessOpen = ($(response.data).find('#business_status').text() === 'open')
         })
