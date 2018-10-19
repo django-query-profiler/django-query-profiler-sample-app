@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # Production mode
-PRODUCTION = False
+PRODUCTION = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if PRODUCTION:
@@ -135,3 +135,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+# Production mode specific settings
+if PRODUCTION:
+    X_FRAME_OPTIONS = 'DENY'
