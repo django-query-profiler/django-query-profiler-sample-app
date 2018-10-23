@@ -40,6 +40,13 @@ python3 manage.py test
 ```
 
 ## Demo
+Deploed app@ http://tomliangg.pythonanywhere.com 
+
+demo user1: barista  
+pass: demo_abc  
+
+demo user2: customer  
+pass: demo_abc  
 ### Home Page
 ![Alt text](/img/homepage.png?raw=true "Homepage")
 
