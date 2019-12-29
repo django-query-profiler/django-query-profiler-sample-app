@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django_query_profiler.settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # Production mode
-PRODUCTION = True
+PRODUCTION = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
 if PRODUCTION:
@@ -50,10 +51,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'food',
-    'rest_framework'
+    'rest_framework',
+    'django_query_profiler'
 ]
 
 MIDDLEWARE = [
+    'django_query_profiler.client.middleware.QueryProfilerMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,7 +92,7 @@ WSGI_APPLICATION = 'coffee_master.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django_query_profiler.django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
