@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.urls import path
+
 from . import views
 from food import views as food_view
 
@@ -24,6 +26,7 @@ urlpatterns = [
     url(r'^food/', include('food.urls')),
     url(r'^about/$', views.about),
     url(r'^$', food_view.homepage),
+    path('django_query_profiler/', include('django_query_profiler.client.urls')),
 ]
 
 # override 403 error view
